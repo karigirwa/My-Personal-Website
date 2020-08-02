@@ -88,18 +88,16 @@ list-style: none;
 <body>
   <header class="header">
 
-        <div class="title">
-            
-            <h1>Happiness Karigirwa</h1>
-        </div>
-
     <nav class="nav">
 
       
         <ul> 
+        <li><a href="#">Home</a></li>
         <li><a href="#">About</a></li>
-        <li><a href="#">join</a></li>
-        <li><a href="#">Sign up</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Service</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Login</a></li>
               </ul>
             </div>
   
@@ -113,7 +111,7 @@ list-style: none;
 <h3>Contact </h3>
 
 <div class="container">
-  <form name="myForm" action="/"  onsubmit="return validForm()" method="get">
+  <form name="myForm" action="thank.html"  onsubmit="return validForm()" method="get">
     <label for="fname">First Name</label>
     <input type="text" id="fname" name="firstName" placeholder="Your name..">
 
@@ -159,7 +157,8 @@ function validForm() {
     }
     }
     }
-    return false;
+    alert('Thank you for contacting me')
+    //return false;
     }
     
     
