@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+body h3{
+  text-align: center;
+}
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.header {
+    
+  background-color:#C0C0C0; 
+    
+  
+  } 
+
+    .header h1 {
+
+        color: #FFFAFA;
+       
+        padding: 10px;
+    }
+
+.nav{
+    background-color:#808080;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+        padding: 20px;
+     width: 100%; 
+   height: 100%; 
+}
+ .nav ul {
+display: flex;
+justify-content:flex-end;
+list-style: none;
+ }
+.nav a {
+
+  text-decoration: none;
+  margin: 10px;
+  color: #FFFFFF;
+  font-size: 17px;
+  padding: 20px;
+}
+
+.nav a:hover {
+  background: #ddd;
+  color: black;
+}
+</style>
+</head>
+<body>
+  <header class="header">
+
+    <nav class="nav">
+
+      
+        <ul> 
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="service.html">Service</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
+              </ul>
+            </div>
+  
+        </nav>
+        
+        
+
+        
+  
+
+<h3>Contact </h3>
+
+<div class="container">
+  <form name="myForm" id="form1"  onsubmit="return validForm()" method="get">
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstName" placeholder="Your name..">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastName" placeholder="Your last name..">
+    <label for="lname">Phone Number</label>
+    <input type="text" id="phone" name="phoneNumber" placeholder="phone number..">
+    <label for="lname">Email</label>
+    <input type="text" id="email" name="Email" placeholder="email..">
+    <label for="subject">Subject</label>
+    <textarea id="subject" name="subject" placeholder="Write something.." style="height:100px"></textarea>
+
+    <input type="submit" value="Submit">
+    
+  </form>
+  </div>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyB0xS0pypYlg717epaDSX1S09LPyhkmi5s",
+    authDomain: "happy-s-project.firebaseapp.com",
+    databaseURL: "https://happy-s-project.firebaseio.com",
+    projectId: "happy-s-project",
+    storageBucket: "happy-s-project.appspot.com",
+    messagingSenderId: "28830862650",
+    appId: "1:28830862650:web:157d2129b7ddfde4599403"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+ let db=firebase.firestore()
+  console.log(db)
+</script>
+
+<script>
+function validForm() {
+    
+    var fname= document.myForm.firstName;
+    var lname= document.myForm.lastName;
+    var phone= document.myForm.phoneNumber;
+    var mail= document.myForm.Email;
+    var text= document.myForm.subject;
+    
+    if(first(fname))
+    {
+     
+    if(last(lname))
+    {
+    
+    if(ValidateEmail(mail))
+    {
+    if(numeric(phone))
+    {
+    
+    if(story(text))
+    {
+    
+     
+    }
+    }
+    }
+    }
+    }
+    alert('Thank you for contacting me')
+    //return false;
+    }
+    
+    
+    //JavaScript code for validating firstname
+    
+    function first(fname)
+    { 
+    var letters = /^[A-Za-z]+$/;
+    if(fname.value.match(letters))
+    {
+    return true;
+    }
+    else
+    {
+    alert('First name  must be letter');
+    fname.focus();
+    return false;
+    }
+    }
+    
+    //JavaScript code for validating lastname
+    
+    function last(lname)
+    { 
+    var let = /^[A-Za-z]+$/;
+    if(lname.value.match(let))
+    {
+    return true;
+    }
+    else
+    {
+    alert('last name must be letters');
+    lname.focus();
+    return false;
+    }
+    }
+    
+    //JavaScript code for validating email format
+    function ValidateEmail(mail)
+    {
+    var mailformat = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
+    if(mail.value.match(mailformat))
+    {
+    return true;
+    }
+    else
+    {
+    alert("You have entered an invalid email address! (example@gmail.com)");
+    mail.focus();
+    return false;
+    }
+    }
+    
+    //JavaScript code for validating phone number
+    function numeric(phone)
+    { 
+    var numbers = /^[0-9]+$/;
+    if(phone.value.match(numbers))
+    {
+    return true;
+    }
+    else
+    {
+    alert('phone number must be  numeric characters');
+    phone.focus();
+    return false;
+    }
+    }
+    
+    //JavaScript code for validating textarea
+    
+    function story(text)
+    { 
+    var area = /^[A-Za-z]+$/;
+    if(text.value.match(area))
+    {
+    return true;
+    }
+    else
+    {
+    alert('textarea  must be filled out and have alphabet characters only');
+    text.focus();
+    return false;
+    }
+    }
+// extract form  // Submit form
+document.getElementById('form1').addEventListener('submit',submitForm);
+
+
+//---submit--
+ function submitForm(e){
+   e.preventDefault();
+   // get input
+   
+   var name = getInput('fname');
+   var lastname = getInput('lname');
+   var email = getInput('email');
+   var phone = getInput('phone');
+   var message = getInput('subject');
+saveData(name,lastname,email,phone,message);
+   console.log(message);
+ }
+     
+ 
+ // Function to get form values
+ function getInput(id){
+    return document.getElementById(id).value;
+  }
+
+  //----get html element---
+
+
+    //---conecting data to firestor
+function saveData(a,b,c,d,e){
+    db.collection("contact").add({
+    firstName: a,
+    lastName :b,
+    email:c,
+    phoneNumber:d,
+    message:e
+ })
+ .then(function(docRef) {
+    console.log("Document written with ID: ", docRef.id);
+ })
+ .catch(function(error) {
+    console.error("Error adding document: ", error);
+ });
+ }
+</script> 
+</body>
+</html>
