@@ -270,6 +270,10 @@ function validForm() {
     }
     }
 // extract form  // Submit form
+document.getElementById('form1').addEventListener('submit',submitForm);
+
+
+//---submit--
  function submitForm(e){
    e.preventDefault();
    // get input
@@ -279,7 +283,7 @@ function validForm() {
    var email = getInput('email');
    var phone = getInput('phone');
    var message = getInput('subject');
-
+saveData(name,lastname,email,phone,message);
    console.log(message);
  }
      
@@ -290,24 +294,16 @@ function validForm() {
   }
 
   //----get html element---
-let nam1, nam2, mail,phon,text;
- 
- 
-    nam1 = document.getElementById('fname').value;
-    nam2 = document.getElementById('lname').value;
-    mail = document.getElementById('email').value;
-    phon = document.getElementById('phone').value;
-    text = document.getElementById('subject').value;
-    console.log(nam1);
+
 
     //---conecting data to firestor
-
+function saveData(a,b,c,d,e){
     db.collection("contact").add({
-    firstName: nam1,
-    lastName :nam2,
-    email:mail,
-    phoneNumber:phon,
-    message:text
+    firstName: a,
+    lastName :b,
+    email:c,
+    phoneNumber:d,
+    message:e
  })
  .then(function(docRef) {
     console.log("Document written with ID: ", docRef.id);
@@ -315,6 +311,7 @@ let nam1, nam2, mail,phon,text;
  .catch(function(error) {
     console.error("Error adding document: ", error);
  });
+ }
 </script> 
 </body>
 </html>
