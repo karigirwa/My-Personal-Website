@@ -111,15 +111,15 @@ list-style: none;
 <h3>Contact </h3>
 
 <div class="container">
-  <form name="myForm" id="form1"  onsubmit="return validForm()" method="post">
+  <form name="myForm" id="form1"  onsubmit="return validForm()" method="get">
     <label for="fname">First Name</label>
     <input type="text" id="fname" name="firstName" placeholder="Your name..">
 
     <label for="lname">Last Name</label>
     <input type="text" id="lname" name="lastName" placeholder="Your last name..">
-    <label for="phone">Phone Number</label>
+    <label for="lname">Phone Number</label>
     <input type="text" id="phone" name="phoneNumber" placeholder="phone number..">
-    <label for="email">Email</label>
+    <label for="lname">Email</label>
     <input type="text" id="email" name="Email" placeholder="email..">
     <label for="subject">Subject</label>
     <textarea id="subject" name="subject" placeholder="Write something.." style="height:100px"></textarea>
@@ -172,19 +172,21 @@ function validForm() {
     {
     if(numeric(phone))
     {
-      submitForm()
-    alert('Thank you for contacting me') 
-   
+    
+    if(story(text))
+    {
+    
+     
     }
     }
     }
     }
-   
-    return false;
+    }
+    alert('Thank you for contacting me')
+    //return false;
     }
     
-    // extract form  // Submit form
-
+    
     //JavaScript code for validating firstname
     
     function first(fname)
@@ -222,7 +224,7 @@ function validForm() {
     //JavaScript code for validating email format
     function ValidateEmail(mail)
     {
-    var mailformat =/[0-9a-zA-Z]+@[0-9a-zA-Z]+[\.]{1}[0-9a-zA-Z]+[\.]?[0-9a-zA-Z]+/g;
+    var mailformat = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
     if(mail.value.match(mailformat))
     {
     return true;
@@ -253,13 +255,27 @@ function validForm() {
     
     //JavaScript code for validating textarea
     
-   
-
+    function story(text)
+    { 
+    var area = /^[A-Za-z]+$/;
+    if(text.value.match(area))
+    {
+    return true;
+    }
+    else
+    {
+    alert('textarea  must be filled out and have alphabet characters only');
+    text.focus();
+    return false;
+    }
+    }
+// extract form  // Submit form
+document.getElementById('form1').addEventListener('submit',submitForm);
 
 
 //---submit--
- function submitForm(){
-   
+ function submitForm(e){
+   e.preventDefault();
    // get input
    
    var name = getInput('fname');

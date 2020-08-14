@@ -42,16 +42,16 @@ input[type=submit]:hover {
 }
 
 .header {
-    
+
   background-color:#C0C0C0; 
-    
-  
+
+
   } 
 
     .header h1 {
 
         color: #FFFAFA;
-       
+
         padding: 10px;
     }
 
@@ -90,7 +90,7 @@ list-style: none;
 
     <nav class="nav">
 
-      
+
         <ul> 
         <li><a href="#">Home</a></li>
         <li><a href="#">About</a></li>
@@ -100,32 +100,32 @@ list-style: none;
         <li><a href="#">Login</a></li>
               </ul>
             </div>
-  
-        </nav>
-        
-        
 
-        
-  
+        </nav>
+
+
+
+
+
 
 <h3>Contact </h3>
 
 <div class="container">
-  <form name="myForm" id="form1"  onsubmit="return validForm()" method="post">
+  <form name="myForm" id="form1"  onsubmit="return validForm()" method="get">
     <label for="fname">First Name</label>
     <input type="text" id="fname" name="firstName" placeholder="Your name..">
 
     <label for="lname">Last Name</label>
     <input type="text" id="lname" name="lastName" placeholder="Your last name..">
-    <label for="phone">Phone Number</label>
+    <label for="lname">Phone Number</label>
     <input type="text" id="phone" name="phoneNumber" placeholder="phone number..">
-    <label for="email">Email</label>
+    <label for="lname">Email</label>
     <input type="text" id="email" name="Email" placeholder="email..">
     <label for="subject">Subject</label>
     <textarea id="subject" name="subject" placeholder="Write something.." style="height:100px"></textarea>
 
     <input type="submit" value="Submit">
-    
+
   </form>
   </div>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -155,38 +155,40 @@ list-style: none;
 
 <script>
 function validForm() {
-    
+
     var fname= document.myForm.firstName;
     var lname= document.myForm.lastName;
     var phone= document.myForm.phoneNumber;
     var mail= document.myForm.Email;
     var text= document.myForm.subject;
-    
+
     if(first(fname))
     {
-     
+
     if(last(lname))
     {
-    
+
     if(ValidateEmail(mail))
     {
     if(numeric(phone))
     {
-      submitForm()
-    alert('Thank you for contacting me') 
-   
+
+    if(story(text))
+    {
+
+
     }
     }
     }
     }
-   
-    return false;
     }
-    
-    // extract form  // Submit form
+    alert('Thank you for contacting me')
+    //return false;
+    }
+
 
     //JavaScript code for validating firstname
-    
+
     function first(fname)
     { 
     var letters = /^[A-Za-z]+$/;
@@ -201,9 +203,9 @@ function validForm() {
     return false;
     }
     }
-    
+
     //JavaScript code for validating lastname
-    
+
     function last(lname)
     { 
     var let = /^[A-Za-z]+$/;
@@ -218,11 +220,11 @@ function validForm() {
     return false;
     }
     }
-    
+
     //JavaScript code for validating email format
     function ValidateEmail(mail)
     {
-    var mailformat =/[0-9a-zA-Z]+@[0-9a-zA-Z]+[\.]{1}[0-9a-zA-Z]+[\.]?[0-9a-zA-Z]+/g;
+    var mailformat = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
     if(mail.value.match(mailformat))
     {
     return true;
@@ -234,7 +236,7 @@ function validForm() {
     return false;
     }
     }
-    
+
     //JavaScript code for validating phone number
     function numeric(phone)
     { 
@@ -250,44 +252,62 @@ function validForm() {
     return false;
     }
     }
-    
+
     //JavaScript code for validating textarea
-    
-   
 
-
-
-//---submit--
- function submitForm(){
-   
+    function story(text)
+    { 
+    var area = /^[A-Za-z]+$/;
+    if(text.value.match(area))
+    {
+    return true;
+    }
+    else
+    {
+    alert('textarea  must be filled out and have alphabet characters only');
+    text.focus();
+    return false;
+    }
+    }
+// extract form  // Submit form
+ function submitForm(e){
+   e.preventDefault();
    // get input
-   
+
    var name = getInput('fname');
    var lastname = getInput('lname');
    var email = getInput('email');
    var phone = getInput('phone');
    var message = getInput('subject');
-saveData(name,lastname,email,phone,message);
+
    console.log(message);
  }
-     
- 
+
+
  // Function to get form values
  function getInput(id){
     return document.getElementById(id).value;
   }
 
   //----get html element---
+let nam1, nam2, mail,phon,text;
 
+
+    nam1 = document.getElementById('fname').value;
+    nam2 = document.getElementById('lname').value;
+    mail = document.getElementById('email').value;
+    phon = document.getElementById('phone').value;
+    text = document.getElementById('subject').value;
+    console.log(nam1);
 
     //---conecting data to firestor
-function saveData(a,b,c,d,e){
+
     db.collection("contact").add({
-    firstName: a,
-    lastName :b,
-    email:c,
-    phoneNumber:d,
-    message:e
+    firstName: nam1,
+    lastName :nam2,
+    email:mail,
+    phoneNumber:phon,
+    message:text
  })
  .then(function(docRef) {
     console.log("Document written with ID: ", docRef.id);
@@ -295,7 +315,6 @@ function saveData(a,b,c,d,e){
  .catch(function(error) {
     console.error("Error adding document: ", error);
  });
- }
 </script> 
 </body>
-</html>
+</html> 
