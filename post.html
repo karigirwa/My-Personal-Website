@@ -9,7 +9,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 body h3{
   text-align: center;
 }
-input[type=text],input[type=email], select, textarea {
+input[type=text], select, textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -20,17 +20,17 @@ input[type=text],input[type=email], select, textarea {
   resize: vertical;
 }
 
-.button {
+input[type=submit] {
   background-color: #4CAF50;
   color: white;
   padding: 12px 20px;
-  
-  border-radius: 8px;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.button:hover {
-  background-color: #8a978b;
+input[type=submit]:hover {
+  background-color: #45a049;
 }
 
 .container {
@@ -85,43 +85,24 @@ list-style: none;
 }
 </style>
 </head>
-<body onload="onlaudFunction()">
-  <header class="header">
-
-    <nav class="nav">
-
-      
-        <ul> 
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Service</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Login</a></li>
-              </ul>
-            </div>
+<body>
   
-        </nav>
-        
-        
-
-        
-  
-
-<h3>Contact </h3>
+<h3>post </h3>
 
 <div class="container">
+  <form name="myForm" id="form1"   method="get">
+    <label for="fname">Tittle</label>
+    <input type="text" id="tname" name="Tittle" placeholder=" ">
 
-  <form class="contact_form" id="form1" >
-  
-    <input class="contact_input" type="text" required id="name" placeholder="Type Your  Name"></br>
-    <input class="contact_input" type="email" required id="email" placeholder="type your email"></br>
-    <textarea id="text" placeholder="type your message" required class="message" cols="30" rows="10"></textarea></br>
-    <button type="submit" class="button">Send</button>
+    <label for="lname">Writter</label>
+    <input type="text" id="wname" name="name" placeholder=" ">
+    
+    <label for="subject"> Subject</label>
+    <textarea id="subject" name="subject" placeholder=" " style="height:300px"></textarea>
+
+    <input type="submit" value="Submit">
+    
   </form>
-
-
-
   </div>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
@@ -149,43 +130,48 @@ list-style: none;
 </script>
 
 <script>
-//Extract Element from form
-  // Listen for form submit
-  function  onlaudFunction(){
-   var form=document.getElementById('form1');
-   form.addEventListener('submit',send);
- }
- 
- 
- 
- function send(e) {
+
+// extract form  // Submit form
+document.getElementById('form1').addEventListener('submit',submitForm);
+
+
+//---submit--
+ function submitForm(e){
    e.preventDefault();
- 
-   var Name=getInput('name');
-   var Email=getInput('email');
-   var Subject=getInput('text');
-  
-  db.collection("Contact info").add({
-          name:Name,
-          email:Email,
-          message:Subject
-  })
-  
-  document.getElementById('form1').reset();
- window.alert("Thank you for contacting me!");
-  db.collection("Contact info").get().then(function(snapshot){
-    snapshot.forEach(function (doc){
-        console.log(doc.data());
-    });
-  })
+   // get input
+   
+   var heading = getInput('tname');
+   var writer = getInput('wname');
+   var message = getInput('subject');
+saveData(heading,writer,message);
+   console.log(message);
  }
+     
  
- 
-  
- 
+ // Function to get form values
  function getInput(id){
-   return document.getElementById(id).value;
+    return document.getElementById(id).value;
+  }
+
+  //----get html element---
+
+
+    //---conecting data to firestor
+function saveData(a,b,c){
+    db.collection("post").add({
+    Tittle: a,
+    writter :b,
+    Subject:c
+    
+ })
+ .then(function(docRef) {
+    console.log("Document written with ID: ", docRef.id);
+ })
+ .catch(function(error) {
+    console.error("Error adding document: ", error);
+ });
  }
 </script> 
 </body>
 </html>
+

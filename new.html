@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+body h3{
+  text-align: center;
+}
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.header {
+    
+  background-color:#C0C0C0; 
+    
+  
+  } 
+
+    .header h1 {
+
+        color: #FFFAFA;
+       
+        padding: 10px;
+    }
+
+.nav{
+    background-color:#808080;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+        padding: 20px;
+     width: 100%; 
+   height: 100%; 
+}
+ .nav ul {
+display: flex;
+justify-content:flex-end;
+list-style: none;
+ }
+.nav a {
+
+  text-decoration: none;
+  margin: 10px;
+  color: #FFFFFF;
+  font-size: 17px;
+  padding: 20px;
+}
+
+.nav a:hover {
+  background: #ddd;
+  color: black;
+}
+</style>
+</head>
+<body>
+  <header class="header">
+
+    <nav class="nav">
+
+      
+        <ul> 
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Service</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Login</a></li>
+              </ul>
+            </div>
+  
+        </nav>
+        
+        
+
+        
+  
+
+<h3>Contact </h3>
+
+<div class="container">
+  <form name="myForm" id="form1"  onsubmit="return validForm()" method="get">
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstName" placeholder="Your name..">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastName" placeholder="Your last name..">
+    <label for="lname">Phone Number</label>
+    <input type="text" id="phone" name="phoneNumber" placeholder="phone number..">
+    <label for="email">Email</label>
+    <input type="text" id="email" name="Email" value="email"  placeholder="email.." required>
+    <label for="subject">Subject</label>
+    <textarea id="subject" name="subject" placeholder="Write something.." style="height:100px"></textarea>
+
+    <button type="submit" onclick="validation()">Submit</button>
+    
+  </form>
+  </div>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyB0xS0pypYlg717epaDSX1S09LPyhkmi5s",
+    authDomain: "happy-s-project.firebaseapp.com",
+    databaseURL: "https://happy-s-project.firebaseio.com",
+    projectId: "happy-s-project",
+    storageBucket: "happy-s-project.appspot.com",
+    messagingSenderId: "28830862650",
+    appId: "1:28830862650:web:157d2129b7ddfde4599403"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+ let db=firebase.firestore()
+  console.log(db)
+</script>
+
+<script>
+// form validation
+
+const firstname = document.querySelector('#fname') 
+const lastname = document.querySelector('#lname')
+    const mail = document.querySelector('#email')
+    const tel = document.querySelector('#phone')
+    const message = document.querySelector('#subject')
+    
+
+    const validation = () => {
+      
+        if(firstname.value === ""){
+            alert("Please enter your first name...")
+            firstname.focus()
+            return false
+        }
+
+        if(lastname.value === ""){
+            alert("Please enter your last name...")
+            lastname.focus()
+            return false
+        }
+
+        if(mail.value === ""){
+            alert("Please enter your email...")
+            mail.focus()
+            return false
+        }
+
+        if(tel.value === ""){
+            alert("Please enter your phone number...")
+            tel.focus()
+            return false
+        }
+
+        if(message.value === ""){
+            alert("Please enter your message...")
+            message.focus()
+            return false
+        }
+
+        if (firstname.value === "" || lastname.value === "" || mail.value === "" || tel.value === "" || message.value === ""){
+            return false
+        }else{
+          document.getElementById('form1').addEventListener('submit',submitForm);
+            window.alert('thank you for contacting me!')
+        }
+    }
+
+
+    
+    //JavaScript code for validating textarea
+    
+   
+// extract form  // Submit form
+
+
+
+//---submit--
+ function submitForm(e){
+   e.preventDefault();
+   // get input
+   
+   var name = getInput('fname');
+   var lastname = getInput('lname');
+   var email = getInput('email');
+   var phone = getInput('phone');
+   var message = getInput('subject');
+saveData(name,lastname,email,phone,message);
+   console.log(message);
+ }
+     
+ 
+ // Function to get form values
+ function getInput(id){
+    return document.getElementById(id).value;
+  }
+
+  //----get html element---
+
+
+    //---conecting data to firestor
+function saveData(a,b,c,d,e){
+    db.collection("contact").add({
+    firstName: a,
+    lastName :b,
+    email:c,
+    phoneNumber:d,
+    message:e
+ })
+ .then(function(docRef) {
+    console.log("Document written with ID: ", docRef.id);
+ })
+ .catch(function(error) {
+    console.error("Error adding document: ", error);
+ });
+ }
+</script> 
+</body>
+</html>
